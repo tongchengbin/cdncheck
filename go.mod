@@ -1,4 +1,4 @@
-module github.com/tongchengbin/cdnceck
+module github.com/tongchengbin/cdncheck
 
 go 1.21
 
