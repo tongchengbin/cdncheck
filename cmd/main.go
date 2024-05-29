@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/projectdiscovery/goflags"
-	"github.com/tongchengbin/cdnceck/pkg/cdncheck"
+	"github.com/tongchengbin/cdncheck/pkg/cdncheck"
 	"net"
 	"os"
 )
