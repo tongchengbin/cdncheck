@@ -2,8 +2,6 @@ package cdncheck
 
 import (
 	_ "embed"
-	"encoding/json"
-	"fmt"
 	"strings"
 )
 
@@ -17,13 +15,4 @@ func mapKeys(m map[string][]string) string {
 		keys = append(keys, k)
 	}
 	return strings.Join(keys, ", ")
-}
-
-func init() {
-	if err := json.Unmarshal([]byte(data), &generatedData); err != nil {
-		panic(fmt.Sprintf("Could not parse cidr data: %s", err))
-	}
-	DefaultCDNProviders = mapKeys(generatedData.CDN)
-	DefaultWafProviders = mapKeys(generatedData.WAF)
-	DefaultCloudProviders = mapKeys(generatedData.Cloud)
 }

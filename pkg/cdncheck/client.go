@@ -1,6 +1,8 @@
 package cdncheck
 
 import (
+	"encoding/json"
+	"fmt"
 	"net"
 	"sync"
 )
@@ -14,15 +16,24 @@ type Client struct {
 	retryAbleDns *retryabledns.Client
 }
 
+// noinspection GoUnusedGlobalVariable
 var (
-	DefaultCDNProviders   string
-	DefaultWafProviders   string
-	DefaultCloudProviders string
+	CdnClient *Client
+	once      sync.Once
 )
 
 func New() *Client {
 	client, _ := NewWithOpts(3, []string{})
 	return client
+}
+
+func Init() {
+	once.Do(func() {
+		CdnClient = New()
+		if err := json.Unmarshal([]byte(data), &generatedData); err != nil {
+			panic(fmt.Sprintf("Could not parse cidr data: %s", err))
+		}
+	})
 }
 
 // DefaultResolvers trusted (taken from fastdialer)
